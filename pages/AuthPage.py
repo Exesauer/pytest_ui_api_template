@@ -20,7 +20,7 @@ class AuthPage:
         password_element.send_keys(password)
         self.__driver.find_element(By.CLASS_NAME, "css-178ag6o").click()
         WebDriverWait(self.__driver, 10).until(
-            EC.visibility_of_element_located((By.CLASS_NAME, "DD3DlImSMT6fgc")))
+            EC.visibility_of_element_located((By.CSS_SELECTOR, "button[data-testid=header-member-menu-button]")))
 
     def get_current_url(self):
         return self.__driver.current_url
