@@ -22,6 +22,7 @@ class AuthPage:
             EC.visibility_of_element_located((By.CSS_SELECTOR, "#password"))).send_keys(password)
         self.__driver.find_element(By.CLASS_NAME, "css-178ag6o").click()
 
+    @allure.step("Проверка отображения приветственного сообщения")
     def auth_check(self):
         greeting_element = WebDriverWait(self.__driver, 10).until(
             EC.visibility_of_element_located((By.CSS_SELECTOR, "[data-testid=home-header-greeting]"))).text
