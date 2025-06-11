@@ -15,6 +15,13 @@ class BoardApi:
         path = f"{self.base_url}/organizations/{org_id}/boards"
         resp = requests.get(path, params=my_params)
         return resp.json()
-    
-            # path = ("{trello}/organizations/{id}/boards".
-            #     format(trello=self.base_url, id=org_id))
+
+    def create_board(self, name):
+        my_params = {
+            'name': name,
+            'key': self.api_key,
+            'token': self.token
+            }
+        path = f"{self.base_url}/boards/"
+        resp = requests.post(path, params=my_params)
+        return resp.json()
