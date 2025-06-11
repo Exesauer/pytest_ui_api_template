@@ -12,7 +12,9 @@ class BoardApi:
             'key': self.api_key,
             'token': self.token
             }
-        path = ("{trello}/organizations/{id}/boards".
-                format(trello=self.base_url, id=org_id))
+        path = f"{self.base_url}/organizations/{org_id}/boards"
         resp = requests.get(path, params=my_params)
         return resp.json()
+    
+            # path = ("{trello}/organizations/{id}/boards".
+            #     format(trello=self.base_url, id=org_id))
