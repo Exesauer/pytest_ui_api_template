@@ -6,11 +6,11 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class MainPage:
 
-    def __init__(self, driver: WebDriver)->None:
+    def __init__(self, driver: WebDriver) -> None:
         self.__driver = driver
 
     @allure.step("Переход на страницу Trello")
-    def go_trello(self):
+    def go_trello(self) -> None:
         element = WebDriverWait(self.__driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//div[text()='Trello']")))
         element.click()
@@ -18,7 +18,7 @@ class MainPage:
             EC.visibility_of_element_located((By.CSS_SELECTOR, "button[data-testid=header-member-menu-button]")))
 
     @allure.step("Отображение меню пользователя")
-    def open_profile_menu(self):
+    def open_profile_menu(self) -> None:
         self.__driver.find_element(By.CSS_SELECTOR, "button[data-testid=header-member-menu-button]").click()
 
     @allure.step("Получение информации о пользователе")
@@ -31,5 +31,5 @@ class MainPage:
         return [name, email]
 
     @allure.step("Получение текущего URL")
-    def get_current_url(self):
+    def get_current_url(self) -> str:
         return self.__driver.current_url
