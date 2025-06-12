@@ -2,8 +2,8 @@ import requests
 
 class BoardApi:
 
-    def __init__(self, token, api_key) -> None:
-        self.base_url = "https://api.trello.com/1"
+    def __init__(self, base_url, api_key, token) -> None:
+        self.base_url = base_url
         self.token = token
         self.api_key = api_key
 
@@ -14,7 +14,12 @@ class BoardApi:
             }
         path = f"{self.base_url}/organizations/{org_id}/boards"
         response = requests.get(path, params=query)
-        return response.json()
+        try:
+            response.raise_for_status()
+            result = response.json()
+        except requests.exceptions.HTTPError as e:
+            print(f"Произошла ошибка при выполнении запроса: {e}")
+        return result
 
     def create_board(self, name, defaultLists) -> dict:
         query = {
@@ -25,22 +30,26 @@ class BoardApi:
             }
         path = f"{self.base_url}/boards/"
         response = requests.post(path, params=query)
-        return response.json()
-    
-    def delete_board(self, id) -> requests.Response:
+        try:
+            response.raise_for_status()
+            result = response.json()
+        except requests.exceptions.HTTPError as e:
+            print(f"Произошла ошибка при выполнении запроса: {e}")
+        return result
+
+    def delete_board_by_id(self, id) -> dict:
         query = {
             'key': self.api_key,
             'token': self.token
             }
         path = f"{self.base_url}/boards/{id}"
         response = requests.delete(path, params=query)
-        return response
-    
+        try:
+            response.raise_for_status()
+            result = response.json()
+        except requests.exceptions.HTTPError as e:
+            print(f"Произошла ошибка при выполнении запроса: {e}")
+        return result
+
     def get_id_last_board(self, org_id: str) -> str:
-        query = {
-            'key': self.api_key,
-            'token': self.token
-            }
-        path = f"{self.base_url}/organizations/{org_id}/boards"
-        response = requests.get(path, params=query)
-        return response.json()[-1]["id"]
+        return self.get_all_boards_by_org_id(org_id)[-1]["id"]
