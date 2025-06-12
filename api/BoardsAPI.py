@@ -7,21 +7,40 @@ class BoardApi:
         self.token = token
         self.api_key = api_key
 
-    def get_all_boards_by_org_id(self, org_id: str) -> dict:
-        my_params = {
+    def get_all_boards_by_org_id(self, org_id: str) -> list:
+        query = {
             'key': self.api_key,
             'token': self.token
             }
         path = f"{self.base_url}/organizations/{org_id}/boards"
-        resp = requests.get(path, params=my_params)
-        return resp.json()
+        response = requests.get(path, params=query)
+        return response.json()
 
-    def create_board(self, name):
-        my_params = {
+    def create_board(self, name, defaultLists) -> dict:
+        query = {
             'name': name,
+            'key': self.api_key,
+            'token': self.token,
+            'defaultLists': defaultLists
+            }
+        path = f"{self.base_url}/boards/"
+        response = requests.post(path, params=query)
+        return response.json()
+    
+    def delete_board(self, id) -> requests.Response:
+        query = {
             'key': self.api_key,
             'token': self.token
             }
-        path = f"{self.base_url}/boards/"
-        resp = requests.post(path, params=my_params)
-        return resp.json()
+        path = f"{self.base_url}/boards/{id}"
+        response = requests.delete(path, params=query)
+        return response
+    
+    def get_id_last_board(self, org_id: str) -> str:
+        query = {
+            'key': self.api_key,
+            'token': self.token
+            }
+        path = f"{self.base_url}/organizations/{org_id}/boards"
+        response = requests.get(path, params=query)
+        return response.json()[-1]["id"]
