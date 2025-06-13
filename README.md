@@ -23,7 +23,10 @@
 - ./pages - Описание страниц
 - ./api - Вспомогательные модули для работы с API
 - ./db - Вспомогательные модули для работы с БД
-- test_config.ini - Настройки для тестов
+- ./configuration - Провайдер настроек для тестов
+    - test_config.ini - Настройки
+- ./testdata - Провайдер тестовых данных
+    - test_data.json - Данные
 
 ### Полезные ссылки
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
