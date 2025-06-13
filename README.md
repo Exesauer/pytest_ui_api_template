@@ -32,3 +32,5 @@
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
 - [Генератор файла .gitignore](https://www.toptal.com/developers/gitignore)
 - [Официальный репозиторий библиотек Python](https://pypi.org/)
+- [ConfigParser](https://docs.python.org/3/library/configparser.html)
+- [pip freeze](https://pip.pypa.io/en/stable/cli/pip_freeze/)
