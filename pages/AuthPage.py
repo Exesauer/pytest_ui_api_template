@@ -5,12 +5,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from configuration.ConfigProvider import ConfigProvider
 
-base_url = ConfigProvider().get("ui", "base_url")
+config_base_url = ConfigProvider().get("ui", "base_url")
 
 class AuthPage:
 
     def __init__(self, driver: WebDriver) -> None:
-        self.__url = base_url
+        self.__url = config_base_url
         self.__driver = driver
 
     @allure.step("Переход на страницу авторизации")
